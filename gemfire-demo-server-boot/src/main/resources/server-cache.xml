@@ -20,7 +20,7 @@
 	<initializer>
 		<class-name>org.springframework.data.gemfire.support.SpringContextBootstrappingInitializer</class-name>
 		<parameter name="basePackages">
-			<string>io.pivotal.gemfire.demo.customerorder.server</string>
+			<string>io.pivotal.gemfire.demo</string>
 		</parameter>
 	</initializer>
 </cache>

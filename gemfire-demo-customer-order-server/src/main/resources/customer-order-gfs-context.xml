@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gfe="http://www.springframework.org/schema/gemfire"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/gemfire http://www.springframework.org/schema/gemfire/spring-gemfire.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<gfe:partitioned-region id="customer">
+		<gfe:cache-loader>
+			<bean
+				class="io.pivotal.gemfire.demo.customerorder.server.cacheloader.CustomerCacheLoader" />
+		</gfe:cache-loader>
+	</gfe:partitioned-region>
+	<gfe:partitioned-region id="customer-order" />
+	<gfe:partitioned-region id="item" />
+
+	<gfe:function-service>
+		<gfe:function>
+			<bean id="GetCustomerOrderListFunction"
+				class="io.pivotal.gemfire.demo.customerorder.server.function.GetCustomerOrderListFunction" />
+			<bean id="CalculateCustomerOrderPriceFunction"
+				class="io.pivotal.gemfire.demo.customerorder.server.function.CalculateCustomerOrderPriceFunction" />
+		</gfe:function>
+	</gfe:function-service>
+
+</beans>

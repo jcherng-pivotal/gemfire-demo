@@ -1,0 +1,69 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.pivotal.gemfire.demo</groupId>
+		<artifactId>gemfire-demo-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>gemfire-demo-customer-order-client</artifactId>
+	<name>gemfire-demo-customer-order-client</name>
+	<description>GemFire Demo's customer order client project</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.pivotal.gemfire.demo</groupId>
+			<artifactId>gemfire-demo-model</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.pivotal.gemfire.demo</groupId>
+			<artifactId>gemfire-demo-db-repo</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.pivotal.gemfire.demo</groupId>
+			<artifactId>gemfire-demo-customer-order-server</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.pivotal.gemfire.demo</groupId>
+			<artifactId>gemfire-demo-server-boot</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-ws</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-gemfire</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.shell</groupId>
+			<artifactId>spring-shell</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<workingDirectory>${project.build.directory}/test-working-dir</workingDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

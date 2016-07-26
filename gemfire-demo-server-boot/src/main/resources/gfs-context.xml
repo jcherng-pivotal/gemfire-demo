@@ -23,7 +23,5 @@
 			</util:list>
 		</property>
 	</bean>
-	
-	<import resource="classpath*:*-gfs-context.xml"/>
 
 </beans>

@@ -1,18 +1,13 @@
 package io.pivotal.gemfire.demo.customerorder.client.controller;
 
-
-
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.orm.jpa.EntityScan;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.context.annotation.Import;
 
 import io.pivotal.gemfire.demo.customerorder.client.GemFireCustomerOrderClientApplication;
+import io.pivotal.gemfire.demo.customerorder.server.GemFireCustomerOrderServerApplication;
 
-@SpringBootApplication(exclude = GemFireCustomerOrderClientApplication.class)
-@EntityScan(basePackages = { "io.pivotal.gemfire.demo.model.orm" })
-@EnableJpaRepositories(basePackages = {"io.pivotal.gemfire.demo.db.repository"})
-@ImportResource("classpath:gfs-context.xml")
+@SpringBootApplication(exclude = { GemFireCustomerOrderClientApplication.class })
+@Import({ GemFireCustomerOrderServerApplication.class })
 public class TestConfig {
 
 }

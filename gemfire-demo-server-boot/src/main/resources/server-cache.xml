@@ -3,11 +3,13 @@
 	xmlns="http://schema.pivotal.io/gemfire/cache"
 	xsi:schemaLocation="http://schema.pivotal.io/gemfire/cache http://schema.pivotal.io/gemfire/cache/cache-8.1.xsd"
 	version="8.1">
+
 	<disk-store name="pdx-disk-store">
 		<disk-dirs>
 			<disk-dir>./pdx-disk-store</disk-dir>
 		</disk-dirs>
 	</disk-store>
+
 	<pdx persistent="true" disk-store-name="pdx-disk-store"
 		read-serialized="false">
 		<pdx-serializer>
@@ -17,10 +19,12 @@
 			</parameter>
 		</pdx-serializer>
 	</pdx>
+
 	<initializer>
 		<class-name>org.springframework.data.gemfire.support.SpringContextBootstrappingInitializer</class-name>
 		<parameter name="basePackages">
 			<string>io.pivotal.gemfire.demo</string>
 		</parameter>
 	</initializer>
+
 </cache>

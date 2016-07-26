@@ -13,11 +13,11 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.pivotal.gemfire.demo.db.RepoTestApplication;
+import io.pivotal.gemfire.demo.db.CustomerOrderDBApplication;
 import io.pivotal.gemfire.demo.model.orm.ItemEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = { RepoTestApplication.class})
+@SpringApplicationConfiguration(classes = { CustomerOrderDBApplication.class})
 @Transactional
 @Rollback
 public class ItemRepositoryTest {

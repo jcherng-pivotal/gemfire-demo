@@ -1,4 +1,4 @@
-package io.pivotal.gemfire.demo.customerorder.server.function;
+package io.pivotal.gemfire.demo.server.customerorder.function;
 
 import java.math.BigDecimal;
 import java.util.Date;

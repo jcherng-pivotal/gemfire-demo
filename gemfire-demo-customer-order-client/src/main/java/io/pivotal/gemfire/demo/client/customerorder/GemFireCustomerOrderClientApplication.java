@@ -1,4 +1,4 @@
-package io.pivotal.gemfire.demo.customerorder.client;
+package io.pivotal.gemfire.demo.client.customerorder;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

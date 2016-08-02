@@ -1,4 +1,4 @@
-package io.pivotal.gemfire.demo.customerorder.server.cacheloader;
+package io.pivotal.gemfire.demo.server.customerorder.cacheloader;
 
 import java.util.HashSet;
 import java.util.Set;

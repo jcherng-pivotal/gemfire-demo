@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.springframework.ide.eclipse.boot.launch">
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/gemfire-demo-customer-order-client/src/main/java/io/pivotal/gemfire/demo/customerorder/client/GemFireCustomerOrderClientApplication.java"/>
+<listEntry value="/gemfire-demo-customer-order-client/src/main/java/io/pivotal/gemfire/demo/client/customerorder/GemFireCustomerOrderClientApplication.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
 </listAttribute>
 <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
-<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="io.pivotal.gemfire.demo.customerorder.client.GemFireCustomerOrderClientApplication"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="io.pivotal.gemfire.demo.client.customerorder.GemFireCustomerOrderClientApplication"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="gemfire-demo-customer-order-client"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.springframework.ide.eclipse.boot.launch.BootMavenSourcePathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Djava.security.egd=file:/dev/./urandom -Dgemfire.locator.host=localhost -Dgemfire.locator.port=10334"/>

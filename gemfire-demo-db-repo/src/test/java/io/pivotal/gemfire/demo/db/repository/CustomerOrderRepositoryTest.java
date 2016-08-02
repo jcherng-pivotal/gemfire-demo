@@ -16,6 +16,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import io.pivotal.gemfire.demo.db.CustomerOrderDBApplication;
+import io.pivotal.gemfire.demo.db.repository.CustomerOrderRepository;
+import io.pivotal.gemfire.demo.db.repository.CustomerRepository;
+import io.pivotal.gemfire.demo.db.repository.ItemRepository;
 import io.pivotal.gemfire.demo.model.orm.CustomerEntity;
 import io.pivotal.gemfire.demo.model.orm.CustomerOrderEntity;
 import io.pivotal.gemfire.demo.model.orm.ItemEntity;

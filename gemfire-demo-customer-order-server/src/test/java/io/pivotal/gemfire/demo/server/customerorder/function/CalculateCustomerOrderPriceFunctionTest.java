@@ -1,4 +1,4 @@
-package io.pivotal.gemfire.demo.customerorder.server.function;
+package io.pivotal.gemfire.demo.server.customerorder.function;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -20,14 +20,15 @@ import com.gemstone.gemfire.cache.execute.Execution;
 import com.gemstone.gemfire.cache.execute.FunctionService;
 import com.gemstone.gemfire.cache.execute.ResultCollector;
 
-import io.pivotal.gemfire.demo.customerorder.server.GemFireCustomerOrderServerApplication;
-import io.pivotal.gemfire.demo.customerorder.server.TestUtil;
 import io.pivotal.gemfire.demo.model.gf.key.CustomerKey;
 import io.pivotal.gemfire.demo.model.gf.key.CustomerOrderKey;
 import io.pivotal.gemfire.demo.model.gf.key.ItemKey;
 import io.pivotal.gemfire.demo.model.gf.pdx.Customer;
 import io.pivotal.gemfire.demo.model.gf.pdx.CustomerOrder;
 import io.pivotal.gemfire.demo.model.gf.pdx.Item;
+import io.pivotal.gemfire.demo.server.GemFireCustomerOrderServerApplication;
+import io.pivotal.gemfire.demo.server.customerorder.TestUtil;
+import io.pivotal.gemfire.demo.server.customerorder.function.CalculateCustomerOrderPriceFunction;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = { GemFireCustomerOrderServerApplication.class })

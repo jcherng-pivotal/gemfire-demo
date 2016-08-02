@@ -1,4 +1,4 @@
-package io.pivotal.gemfire.demo.customerorder.client.controller;
+package io.pivotal.gemfire.demo.client.customerorder.controller;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -17,7 +17,6 @@ import com.gemstone.gemfire.cache.execute.Execution;
 import com.gemstone.gemfire.cache.execute.FunctionService;
 import com.gemstone.gemfire.cache.execute.ResultCollector;
 
-import io.pivotal.gemfire.demo.customerorder.server.function.GetCustomerOrderListFunction;
 import io.pivotal.gemfire.demo.model.gf.key.CustomerKey;
 import io.pivotal.gemfire.demo.model.gf.key.CustomerOrderKey;
 import io.pivotal.gemfire.demo.model.gf.key.ItemKey;
@@ -25,6 +24,7 @@ import io.pivotal.gemfire.demo.model.gf.pdx.Customer;
 import io.pivotal.gemfire.demo.model.gf.pdx.CustomerOrder;
 import io.pivotal.gemfire.demo.model.gf.pdx.Item;
 import io.pivotal.gemfire.demo.model.io.CustomerOrderIO;
+import io.pivotal.gemfire.demo.server.customerorder.function.GetCustomerOrderListFunction;
 
 @RestController
 public class CustomerOrderController {

@@ -1,4 +1,4 @@
-package io.pivotal.gemfire.demo.customerorder.server.cacheloader;
+package io.pivotal.gemfire.demo.server.customerorder.cacheloader;
 
 import javax.annotation.Resource;
 
@@ -14,14 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gemstone.gemfire.cache.Region;
 
-import io.pivotal.gemfire.demo.customerorder.server.GemFireCustomerOrderServerApplication;
-import io.pivotal.gemfire.demo.customerorder.server.TestUtil;
 import io.pivotal.gemfire.demo.model.gf.key.CustomerKey;
 import io.pivotal.gemfire.demo.model.gf.key.CustomerOrderKey;
 import io.pivotal.gemfire.demo.model.gf.key.ItemKey;
 import io.pivotal.gemfire.demo.model.gf.pdx.Customer;
 import io.pivotal.gemfire.demo.model.gf.pdx.CustomerOrder;
 import io.pivotal.gemfire.demo.model.gf.pdx.Item;
+import io.pivotal.gemfire.demo.server.GemFireCustomerOrderServerApplication;
+import io.pivotal.gemfire.demo.server.customerorder.TestUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = { GemFireCustomerOrderServerApplication.class })

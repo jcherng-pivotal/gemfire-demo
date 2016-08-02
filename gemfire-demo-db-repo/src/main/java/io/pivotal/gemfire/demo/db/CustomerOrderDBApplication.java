@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Import;
 import io.pivotal.gemfire.demo.model.CustomerOrderModelApplication;
 
 @SpringBootApplication
-@Import({CustomerOrderModelApplication.class})
+@Import({ CustomerOrderModelApplication.class })
 public class CustomerOrderDBApplication {
 
 	public static void main(String[] args) {

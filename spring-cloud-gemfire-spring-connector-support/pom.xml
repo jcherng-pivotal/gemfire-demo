@@ -1,0 +1,102 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.pivotal.gemfire.demo</groupId>
+		<artifactId>gemfire-demo-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>spring-cloud-gemfire-spring-connector-support</artifactId>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<debug>true</debug>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<environmentVariables>
+						<VCAP_SERVICES>{
+							"user-provided": [
+							{
+							"credentials": {
+							"locators": [
+							"localhost[10334]",
+							"localhost[10335]"
+							],
+							"password":
+							"13917597139205230931",
+							"username":
+							"cd390983-01db-4dcf-75fd-79289d4fdbcd"
+							},
+							"label": "user-provided",
+							"name": "gemfire-external-service",
+							"syslog_drain_url": "",
+							"tags": []
+							}
+							]
+							}</VCAP_SERVICES>
+						<VCAP_APPLICATION>{"application_version":"1","application_name":"spring-boot-mvc-test","application_uris":[""],"version":"1.0","name":"spring-boot-mvc-test","instance_id":"abcd","instance_index":0,"host":"0.0.0.0","port":61008}</VCAP_APPLICATION>
+					</environmentVariables>
+					<systemProperties>
+						<property>
+							<name>gemfire.service.id</name>
+							<value>gemfire-external-service</value>
+						</property>
+					</systemProperties>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cloud-connectors</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-gemfire</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.pivotal.spring.cloud</groupId>
+			<artifactId>spring-cloud-gemfire-spring-connector</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
+		<!-- If you intend to deploy the app on Cloud Foundry, add the following -->
+		<!-- dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-cloudfoundry-connector</artifactId>
+		</dependency -->
+		<dependency>
+			<groupId>io.pivotal.spring.cloud</groupId>
+			<artifactId>spring-cloud-gemfire-cloudfoundry-connector</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>

@@ -65,6 +65,12 @@
 			</dependency>
 
 			<dependency>
+				<groupId>io.pivotal.gemfire.demo</groupId>
+				<artifactId>spring-cloud-gemfire-spring-connector-support</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>org.springframework.data</groupId>
 				<artifactId>spring-data-gemfire</artifactId>
 				<version>${spring-data-gemfire.version}</version>

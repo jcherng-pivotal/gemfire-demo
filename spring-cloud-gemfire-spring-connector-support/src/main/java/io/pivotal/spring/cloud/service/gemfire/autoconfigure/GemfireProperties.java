@@ -1,4 +1,4 @@
-package io.pivotal.gemfire.demo.autoconfigure;
+package io.pivotal.spring.cloud.service.gemfire.autoconfigure;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

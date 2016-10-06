@@ -12,7 +12,14 @@ import java.util.regex.Pattern;
  * Created by esuez on 1/17/16.
  */
 public class GemfireServiceInfoCreator extends LocalConfigServiceInfoCreator<GemfireServiceInfo> {
-	private static final Pattern pattern = Pattern.compile("gemfire:\\/\\/(\\w+):(\\d+)\\/*");
+	private static final Pattern pattern = Pattern.compile("gemfire:\\/\\/"
+            + "(((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,6}" // domain name
+            + "|"
+            + "localhost" // localhost
+            + "|"
+            + "(([0-9]{1,3}\\.){3})[0-9]{1,3})" // ip
+            + ":"
+            + "(\\d+)\\/*"); // port
 
 	public GemfireServiceInfoCreator() {
 		super("gemfire");
@@ -26,12 +33,13 @@ public class GemfireServiceInfoCreator extends LocalConfigServiceInfoCreator<Gem
 		return new GemfireServiceInfo(id, locators);
 	}
 
+	
 	public static String extractLocatorFromUri(String uri) {
 		Matcher matcher = pattern.matcher(uri);
 		if (!matcher.matches()) {
 			throw new IllegalArgumentException(
 					"Could not parse locator uri. Expected format gemfire://host:port, received: " + uri);
 		}
-		return matcher.group(1) + "[" + matcher.group(2) + "]";
+		return matcher.group(1) + "[" + matcher.group(5) + "]";
 	}
 }

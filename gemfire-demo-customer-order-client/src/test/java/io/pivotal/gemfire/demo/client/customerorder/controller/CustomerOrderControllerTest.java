@@ -4,16 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import io.pivotal.gemfire.demo.client.customerorder.TestConfig;
-import io.pivotal.gemfire.demo.client.customerorder.controller.CustomerOrderController;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = { TestConfig.class })
-// @WebAppConfiguration // 3
-// @IntegrationTest("server.port:0") // 4
+@SpringBootTest(classes = { TestConfig.class })
 public class CustomerOrderControllerTest {
 	@Autowired
 	CustomerOrderController customerOrderController;

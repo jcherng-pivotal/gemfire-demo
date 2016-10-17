@@ -6,7 +6,7 @@
 		<artifactId>gemfire-demo-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>spring-cloud-gemfire-spring-connector-support</artifactId>
+	<artifactId>spring-cloud-gemfire-support</artifactId>
 
 	<build>
 		<plugins>

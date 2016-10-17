@@ -38,8 +38,9 @@ public class CustomerOrderController {
 	@Resource(name = "item")
 	private Region<ItemKey, Item> itemRegion;
 
-	@RequestMapping(value = "/loadData", method = RequestMethod.GET)
+	@RequestMapping(value = "/loadData", method = RequestMethod.POST)
 	public void loadData() {
+
 		CustomerKey customerKey1 = new CustomerKey("customer1");
 		Customer customer1 = new Customer();
 		customer1.setName("Krikor Garegin");

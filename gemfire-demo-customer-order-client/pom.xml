@@ -12,6 +12,15 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-ws</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-gemfire</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>io.pivotal.gemfire.demo</groupId>
 			<artifactId>gemfire-demo-model</artifactId>
 		</dependency>
@@ -25,12 +34,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-ws</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-gemfire</artifactId>
+			<groupId>io.pivotal.gemfire.demo</groupId>
+			<artifactId>spring-cloud-gemfire-support</artifactId>
 		</dependency>
 
 		<dependency>

@@ -9,6 +9,7 @@ import io.pivotal.gemfire.demo.server.GemFireServerBootApplication;
 public class GemFireInitializer extends SpringContextBootstrappingInitializer {
 
 	public GemFireInitializer() {
+		super();
 		setBeanClassLoader(ClassPathLoader.getLatestAsClassLoader());
 		register(GemFireServerBootApplication.class);
 	}

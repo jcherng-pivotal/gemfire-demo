@@ -5,7 +5,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 
-import io.pivotal.gemfire.demo.server.GemFireCustomerOrderServerApplication;
 import io.pivotal.gemfire.demo.server.GemFireServerBootApplication;
 
 @SpringBootApplication

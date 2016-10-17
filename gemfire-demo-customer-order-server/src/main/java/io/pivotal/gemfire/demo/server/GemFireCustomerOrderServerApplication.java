@@ -9,7 +9,7 @@ import io.pivotal.gemfire.demo.db.CustomerOrderDBApplication;
 
 @SpringBootApplication
 @Import({ CustomerOrderDBApplication.class })
-@PropertySource("classpath:application-gfs.properties")
+@PropertySource("classpath:customer-order-gfs.properties")
 public class GemFireCustomerOrderServerApplication {
 
 	public static void main(String[] args) {

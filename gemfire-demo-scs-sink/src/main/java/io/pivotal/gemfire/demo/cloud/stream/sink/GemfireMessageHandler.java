@@ -2,11 +2,10 @@ package io.pivotal.gemfire.demo.cloud.stream.sink;
 
 import java.util.Map;
 
+import org.apache.geode.cache.Region;
 import org.springframework.integration.handler.AbstractMessageHandler;
 import org.springframework.messaging.Message;
 import org.springframework.util.Assert;
-
-import com.gemstone.gemfire.cache.Region;
 
 public class GemfireMessageHandler extends AbstractMessageHandler {
 

@@ -2,14 +2,13 @@ package io.pivotal.gemfire.demo.cloud.stream.sink;
 
 import javax.annotation.Resource;
 
+import org.apache.geode.cache.Region;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Bean;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.messaging.MessageHandler;
-
-import com.gemstone.gemfire.cache.Region;
 
 @EnableBinding(Sink.class)
 @EnableConfigurationProperties(GemfireSinkProperties.class)

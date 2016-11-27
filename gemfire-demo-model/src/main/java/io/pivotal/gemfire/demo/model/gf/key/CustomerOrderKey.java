@@ -2,8 +2,8 @@ package io.pivotal.gemfire.demo.model.gf.key;
 
 import java.io.Serializable;
 
-import com.gemstone.gemfire.cache.EntryOperation;
-import com.gemstone.gemfire.cache.PartitionResolver;
+import org.apache.geode.cache.EntryOperation;
+import org.apache.geode.cache.PartitionResolver;
 
 import io.pivotal.gemfire.demo.model.gf.pdx.CustomerOrder;
 

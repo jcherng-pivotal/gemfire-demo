@@ -16,8 +16,8 @@
 			<artifactId>spring-boot-starter-ws</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-gemfire</artifactId>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-geode</artifactId>
 		</dependency>
 
 		<dependency>

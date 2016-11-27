@@ -4,10 +4,9 @@ start locator \
 --name=${LOCATOR_NAME} \
 --port=${LOCATOR_PORT} \
 --properties-file=${APP_PWD}/conf/gemfire.properties \
+--load-cluster-configuration-from-dir=false \
+--enable-cluster-configuration=false \
 --J=-Dgemfire.jmx-manager-start=true \
 --J=-Dgemfire.jmx-manager=true \
 --J=-Dgemfire.jmx-manager-port=${JMX_PORT} \
---J=-Dgemfire.jmx-manager-http-port=${JMX_HTTP_PORT} \
---load-cluster-configuration-from-dir=false \
---enable-cluster-configuration=false \
---classpath=${CLASSPATH}
+--J=-Dgemfire.jmx-manager-http-port=${JMX_HTTP_PORT}

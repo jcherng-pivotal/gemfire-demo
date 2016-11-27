@@ -11,6 +11,7 @@ echo $SCRIPTPATH
 
 # Run setenv to set the GemFire environment variables
 source $SCRIPTPATH/setenv.sh
+export CLASSPATH=$CLASSPATH:$WORKING_DIR/cluster/*
 
 # start GemFire instances
 (cd $WORKING_DIR && \

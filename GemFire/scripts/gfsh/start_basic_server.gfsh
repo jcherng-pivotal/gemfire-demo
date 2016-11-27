@@ -5,8 +5,7 @@ start server \
 --server-port=${SERVER_PORT} \
 --cache-xml-file=${APP_PWD}/conf/server-cache.xml \
 --properties-file=${APP_PWD}/conf/gemfire.properties \
---J=-Dgemfire.start-dev-rest-api=true \
---J=-Dgemfire.http-service-port=${HTTP_SERVICE_PORT} \
 --use-cluster-configuration=false \
---classpath=${CLASSPATH}
-# --spring-xml-location=classpath:gfs-context.xml
+--classpath=${CLASSPATH} \
+--J=-Dgemfire.start-dev-rest-api=true \
+--J=-Dgemfire.http-service-port=${HTTP_SERVICE_PORT}

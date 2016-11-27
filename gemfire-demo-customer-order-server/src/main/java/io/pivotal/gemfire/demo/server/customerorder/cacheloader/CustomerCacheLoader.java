@@ -5,14 +5,12 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.apache.geode.cache.CacheLoader;
+import org.apache.geode.cache.CacheLoaderException;
+import org.apache.geode.cache.LoaderHelper;
+import org.apache.geode.cache.Region;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.gemfire.LazyWiringDeclarableSupport;
-
-import com.gemstone.gemfire.cache.CacheLoader;
-import com.gemstone.gemfire.cache.CacheLoaderException;
-import com.gemstone.gemfire.cache.Declarable;
-import com.gemstone.gemfire.cache.LoaderHelper;
-import com.gemstone.gemfire.cache.Region;
+import org.springframework.transaction.annotation.Transactional;
 
 import io.pivotal.gemfire.demo.db.repository.CustomerOrderRepository;
 import io.pivotal.gemfire.demo.db.repository.CustomerRepository;
@@ -25,9 +23,12 @@ import io.pivotal.gemfire.demo.model.gf.pdx.Item;
 import io.pivotal.gemfire.demo.model.orm.CustomerEntity;
 import io.pivotal.gemfire.demo.model.orm.CustomerOrderEntity;
 import io.pivotal.gemfire.demo.model.orm.ItemEntity;
+import io.pivotal.gemfire.demo.server.customerorder.db.ICustomerOrderDBService;
 
-public class CustomerCacheLoader extends LazyWiringDeclarableSupport
-		implements CacheLoader<CustomerKey, Customer>, Declarable {
+public class CustomerCacheLoader implements CacheLoader<CustomerKey, Customer> {
+	
+	@Autowired
+	private ICustomerOrderDBService customerOrderDBService;
 
 	@Autowired
 	private CustomerRepository customerRepository;
@@ -47,7 +48,9 @@ public class CustomerCacheLoader extends LazyWiringDeclarableSupport
 	}
 
 	@Override
+	@Transactional
 	public Customer load(LoaderHelper<CustomerKey, Customer> helper) throws CacheLoaderException {
+		customerOrderDBService.loadDB();
 		CustomerKey customerKey = helper.getKey();
 		CustomerEntity customerEntity = customerRepository.findOne(customerKey.getId());
 		Customer customer = null;
@@ -70,13 +73,16 @@ public class CustomerCacheLoader extends LazyWiringDeclarableSupport
 					item.setDescription(itemEntity.getDescription());
 					item.setPrice(itemEntity.getPrice().toString());
 
+					System.out.println("itemKey: " + itemKey + " item: " + item);
 					itemRegion.put(itemKey, item);
 				}
 				customerOrder.setItemSet(itemSet);
 
+				System.out.println("customerOrderKey: " + customerOrderKey + " customerOrder: " + customerOrder);
 				customerOrderRegion.put(customerOrderKey, customerOrder);
 			}
 		}
+		System.out.println("customerKey: " + customerKey + " customer: " + customer);
 		return customer;
 	}
 

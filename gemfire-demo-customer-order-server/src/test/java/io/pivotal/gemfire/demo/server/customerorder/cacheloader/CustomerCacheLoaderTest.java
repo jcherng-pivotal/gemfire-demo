@@ -2,17 +2,16 @@ package io.pivotal.gemfire.demo.server.customerorder.cacheloader;
 
 import javax.annotation.Resource;
 
+import org.apache.geode.cache.Region;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.gemstone.gemfire.cache.Region;
 
 import io.pivotal.gemfire.demo.model.gf.key.CustomerKey;
 import io.pivotal.gemfire.demo.model.gf.key.CustomerOrderKey;
@@ -20,11 +19,11 @@ import io.pivotal.gemfire.demo.model.gf.key.ItemKey;
 import io.pivotal.gemfire.demo.model.gf.pdx.Customer;
 import io.pivotal.gemfire.demo.model.gf.pdx.CustomerOrder;
 import io.pivotal.gemfire.demo.model.gf.pdx.Item;
-import io.pivotal.gemfire.demo.server.GemFireCustomerOrderServerApplication;
+import io.pivotal.gemfire.demo.server.config.GemFireServerBootConfig;
 import io.pivotal.gemfire.demo.server.customerorder.TestUtil;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = { GemFireCustomerOrderServerApplication.class })
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = { GemFireServerBootConfig.class })
 @Transactional
 @Rollback
 public class CustomerCacheLoaderTest {

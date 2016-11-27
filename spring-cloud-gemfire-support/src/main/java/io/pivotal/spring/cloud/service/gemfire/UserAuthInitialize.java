@@ -2,10 +2,10 @@ package io.pivotal.spring.cloud.service.gemfire;
 
 import java.util.Properties;
 
-import com.gemstone.gemfire.LogWriter;
-import com.gemstone.gemfire.distributed.DistributedMember;
-import com.gemstone.gemfire.security.AuthInitialize;
-import com.gemstone.gemfire.security.AuthenticationFailedException;
+import org.apache.geode.LogWriter;
+import org.apache.geode.distributed.DistributedMember;
+import org.apache.geode.security.AuthInitialize;
+import org.apache.geode.security.AuthenticationFailedException;
 
 public class UserAuthInitialize implements AuthInitialize {
 
@@ -29,12 +29,14 @@ public class UserAuthInitialize implements AuthInitialize {
 	public UserAuthInitialize() {
 	}
 
-	public Properties getCredentials(Properties props, DistributedMember server, boolean isPeer) throws AuthenticationFailedException {
+	public Properties getCredentials(Properties props, DistributedMember server, boolean isPeer)
+			throws AuthenticationFailedException {
 
 		Properties newProps = new Properties();
 		String userName = props.getProperty(USER_NAME);
 		if (userName == null) {
-			throw new AuthenticationFailedException("UserPasswordAuthInit: user name property [" + USER_NAME + "] not set.");
+			throw new AuthenticationFailedException(
+					"UserPasswordAuthInit: user name property [" + USER_NAME + "] not set.");
 		}
 		newProps.setProperty(USER_NAME, userName);
 		String passwd = props.getProperty(PASSWORD);

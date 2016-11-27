@@ -7,11 +7,10 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.apache.geode.cache.Region;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.gemstone.gemfire.cache.Region;
 
 import io.pivotal.gemfire.demo.db.repository.CustomerOrderRepository;
 import io.pivotal.gemfire.demo.db.repository.CustomerRepository;

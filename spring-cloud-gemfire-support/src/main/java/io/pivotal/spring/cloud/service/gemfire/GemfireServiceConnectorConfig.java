@@ -1,8 +1,7 @@
 package io.pivotal.spring.cloud.service.gemfire;
 
+import org.apache.geode.pdx.PdxSerializer;
 import org.springframework.cloud.service.ServiceConnectorConfig;
-
-import com.gemstone.gemfire.pdx.PdxSerializer;
 
 /**
  * 

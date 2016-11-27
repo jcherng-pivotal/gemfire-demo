@@ -1,8 +1,7 @@
 package io.pivotal.gemfire.demo.server.initializer;
 
+import org.apache.geode.internal.ClassPathLoader;
 import org.springframework.data.gemfire.support.SpringContextBootstrappingInitializer;
-
-import com.gemstone.gemfire.internal.ClassPathLoader;
 
 import io.pivotal.gemfire.demo.server.GemFireServerBootApplication;
 

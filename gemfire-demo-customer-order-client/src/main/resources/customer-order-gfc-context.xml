@@ -11,7 +11,7 @@
 	<gfe:client-region id="customer-order" shortcut="PROXY" />
 	<gfe:client-region id="item" shortcut="PROXY" />
 
-	<bean id="autoPdxSerializer" class="com.gemstone.gemfire.pdx.ReflectionBasedAutoSerializer">
+	<bean id="autoPdxSerializer" class="org.apache.geode.pdx.ReflectionBasedAutoSerializer">
 		<property name="serializableClasses">
 			<util:list value-type="java.lang.String">
 				<value>io.pivotal.gemfire.demo.model.gf.pdx.*</value>

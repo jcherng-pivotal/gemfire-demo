@@ -5,6 +5,10 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
+import org.apache.geode.cache.Cache;
+import org.apache.geode.cache.client.ClientCache;
+import org.apache.geode.cache.client.ClientCacheFactory;
+import org.apache.geode.pdx.PdxSerializer;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -22,11 +26,6 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.gemfire.client.ClientCacheFactoryBean;
-
-import com.gemstone.gemfire.cache.Cache;
-import com.gemstone.gemfire.cache.client.ClientCache;
-import com.gemstone.gemfire.cache.client.ClientCacheFactory;
-import com.gemstone.gemfire.pdx.PdxSerializer;
 
 import io.pivotal.spring.cloud.service.common.GemfireServiceInfo;
 import io.pivotal.spring.cloud.service.gemfire.GemfireServiceConnectorConfig;

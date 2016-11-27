@@ -5,7 +5,7 @@
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-	<bean id="autoPdxSerializer" class="com.gemstone.gemfire.pdx.ReflectionBasedAutoSerializer">
+	<bean id="autoPdxSerializer" class="org.apache.geode.pdx.ReflectionBasedAutoSerializer">
 		<property name="serializableClasses">
 			<util:list value-type="java.lang.String">
 				<value>io.pivotal.gemfire.demo.model.gf.pdx.*</value>

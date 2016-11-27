@@ -4,19 +4,16 @@ import static org.junit.Assert.assertNotNull;
 
 import javax.annotation.Resource;
 
+import org.apache.geode.cache.Region;
+import org.apache.geode.cache.client.ClientCache;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
-import org.springframework.boot.autoconfigure.cloud.CloudAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import com.gemstone.gemfire.cache.Region;
-import com.gemstone.gemfire.cache.client.ClientCache;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { GemfireClientAutoConfigurationTests.GemfireClientAutoConfigurationApplication.class })
@@ -44,7 +41,7 @@ public abstract class GemfireClientAutoConfigurationTests {
 			assertNotNull(testCachingProxyRegion);
 		}
 	}
-	
+
 	@ActiveProfiles(profiles = { "cloud" })
 	public static class CloudConfigurationTests extends GemfireClientAutoConfigurationTests {
 		@Test

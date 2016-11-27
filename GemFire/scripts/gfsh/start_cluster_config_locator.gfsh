@@ -1,0 +1,14 @@
+echo --string=${SYS_CLASSPATH}
+echo --string=${APP_PWD}
+start locator \
+--name=${LOCATOR_NAME} \
+--port=${LOCATOR_PORT} \
+--enable-cluster-configuration=true \
+--load-cluster-configuration-from-dir=true \
+--J=-Dgemfire.jmx-manager-start=true \
+--J=-Dgemfire.jmx-manager=true \
+--J=-Dgemfire.jmx-manager-port=${JMX_PORT} \
+--J=-Dgemfire.jmx-manager-http-port=${JMX_HTTP_PORT}
+import cluster-configuration --zip-file-name=${APP_PWD}/cluster_config.zip
+status cluster-config-service
+

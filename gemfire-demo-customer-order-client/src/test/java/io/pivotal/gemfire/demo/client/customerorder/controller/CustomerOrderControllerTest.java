@@ -17,7 +17,7 @@ public class CustomerOrderControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		customerOrderController.loadData();
+		customerOrderController.loadDataByRegionPutAll();
 	}
 
 	@Test

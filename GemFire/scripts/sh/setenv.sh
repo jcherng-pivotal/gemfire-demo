@@ -10,7 +10,7 @@ SCRIPTPATH="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 echo $SCRIPTPATH
 
 export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
-export GEMFIRE=~/pivotal/pivotal-gemfire-9.0.0-beta.1/
+export GEMFIRE=~/pivotal/pivotal-gemfire-9.0.1/
 export WORKING_DIR=$SCRIPTPATH/../..
 export CONF_DIR=$WORKING_DIR/conf
 export LIB_DIR=$WORKING_DIR/lib

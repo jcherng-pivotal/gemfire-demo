@@ -4,23 +4,20 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.annotation.Resource;
 
-import org.apache.geode.cache.Cache;
-import org.apache.geode.cache.Declarable;
+import org.apache.geode.cache.GemFireCache;
 import org.apache.geode.cache.Region;
-import org.apache.geode.cache.Region.Entry;
-import org.apache.geode.cache.execute.Function;
-import org.apache.geode.cache.execute.FunctionContext;
 import org.apache.geode.cache.execute.FunctionException;
 import org.apache.geode.cache.execute.RegionFunctionContext;
 import org.apache.geode.cache.query.Query;
 import org.apache.geode.cache.query.QueryService;
 import org.apache.geode.cache.query.SelectResults;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.gemfire.LazyWiringDeclarableSupport;
 
 import io.pivotal.gemfire.demo.model.gf.key.CustomerKey;
 import io.pivotal.gemfire.demo.model.gf.key.CustomerOrderKey;
@@ -32,7 +29,7 @@ import io.pivotal.gemfire.demo.model.io.CustomerIO;
 import io.pivotal.gemfire.demo.model.io.CustomerOrderIO;
 import io.pivotal.gemfire.demo.model.io.ItemIO;
 
-public class CustomerOrderListFunction extends LazyWiringDeclarableSupport implements Function, Declarable {
+public class CustomerOrderListFunction extends AbstractDataAwareFunction {
 
 	/**
 	 * 
@@ -40,7 +37,7 @@ public class CustomerOrderListFunction extends LazyWiringDeclarableSupport imple
 	private static final long serialVersionUID = 2567344131414543904L;
 
 	@Autowired
-	private Cache cache;
+	private GemFireCache cache;
 
 	@Resource(name = "customer")
 	private Region<CustomerKey, Customer> customerRegion;
@@ -52,29 +49,38 @@ public class CustomerOrderListFunction extends LazyWiringDeclarableSupport imple
 	private Region<ItemKey, Item> itemRegion;
 
 	@Override
+	boolean validateFilters(Set<?> filters) {
+		Optional.ofNullable(filters).filter(s -> !s.isEmpty())
+				.map(s -> s.stream().filter(v -> !(v instanceof CustomerKey)).count()).filter(count -> count == 0)
+				.orElseThrow(() -> new IllegalArgumentException("invalid filters for CustomerOrderListFunction"));
+		return true;
+	}
+
+	@Override
+	boolean validateRequest(Object request) {
+		// request validation is not required for this function
+		return true;
+	}
+
 	@SuppressWarnings("unchecked")
-	public void execute(FunctionContext fc) {
-		if (!(fc instanceof RegionFunctionContext)) {
-			throw new FunctionException(
-					"This is a data aware function, and has to be called using FunctionService.onRegion.");
-		}
-		RegionFunctionContext rfc = (RegionFunctionContext) fc;
+	@Override
+	void process(RegionFunctionContext regionFunctionContext) {
 		QueryService queryService = cache.getQueryService();
 		String qstr = "SELECT * FROM /customer-order.entries entry";
 
 		try {
 			Query query = queryService.newQuery(qstr);
 			SelectResults<Entry<CustomerOrderKey, CustomerOrder>> results = (SelectResults<Entry<CustomerOrderKey, CustomerOrder>>) query
-					.execute(rfc);
+					.execute(regionFunctionContext);
 			List<Entry<CustomerOrderKey, CustomerOrder>> entryList = results.asList();
 
 			CustomerOrderIO customerOrderIO = null;
 			for (Entry<CustomerOrderKey, CustomerOrder> entry : entryList) {
 				if (customerOrderIO != null) {
-					fc.getResultSender().sendResult(customerOrderIO);
+					regionFunctionContext.getResultSender().sendResult(customerOrderIO);
 				}
 
-				if (rfc.getFilter().contains(entry.getKey().getCustomerKey())) {
+				if (regionFunctionContext.getFilter().contains(entry.getKey().getCustomerKey())) {
 					Customer customer = customerRegion.get(entry.getKey().getCustomerKey());
 					CustomerIO customerIO = new CustomerIO(entry.getKey().getCustomerKey().getId(), customer.getName());
 
@@ -99,31 +105,11 @@ public class CustomerOrderListFunction extends LazyWiringDeclarableSupport imple
 			}
 
 			// Send the result to function caller node.
-			fc.getResultSender().lastResult(customerOrderIO);
+			regionFunctionContext.getResultSender().lastResult(customerOrderIO);
 
 		} catch (Exception e) {
 			throw new FunctionException(e);
 		}
-	}
-
-	@Override
-	public String getId() {
-		return this.getClass().getSimpleName();
-	}
-
-	@Override
-	public boolean hasResult() {
-		return true;
-	}
-
-	@Override
-	public boolean isHA() {
-		return false;
-	}
-
-	@Override
-	public boolean optimizeForWrite() {
-		return true;
 	}
 
 }

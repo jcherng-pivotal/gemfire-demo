@@ -1,6 +1,5 @@
 package io.pivotal.gemfire.demo.server.customerorder.function;
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,12 +24,13 @@ import io.pivotal.gemfire.demo.model.gf.key.ItemKey;
 import io.pivotal.gemfire.demo.model.gf.pdx.Customer;
 import io.pivotal.gemfire.demo.model.gf.pdx.CustomerOrder;
 import io.pivotal.gemfire.demo.model.gf.pdx.Item;
-import io.pivotal.gemfire.demo.server.config.GemFireServerBootConfig;
+import io.pivotal.gemfire.demo.model.io.CustomerOrderIO;
+import io.pivotal.gemfire.demo.server.config.GemFireCustomerOrderServerConfig;
 import io.pivotal.gemfire.demo.server.customerorder.TestUtil;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = { GemFireServerBootConfig.class })
-public class CustomerOrderPriceFunctionTest {
+@SpringBootTest(classes = { GemFireCustomerOrderServerConfig.class })
+public class CustomerOrderListFunctionIntegrationTest {
 	@Autowired
 	private TestUtil testUtil;
 
@@ -56,36 +56,32 @@ public class CustomerOrderPriceFunctionTest {
 		filter.add(customerKey);
 
 		Execution execution = FunctionService.onRegion(customerOrderRegion).withFilter(filter);
-		ResultCollector<?, ?> rc = execution.execute(CustomerOrderPriceFunction.class.getSimpleName());
-		List<BigDecimal> result = (List<BigDecimal>) rc.getResult();
-		Assert.assertEquals(1, result.size());
-		BigDecimal totalPrice = result.get(0);
-		// 1.59 + 2.58 = 4.17
-		Assert.assertEquals(new BigDecimal("4.17"), totalPrice);
+		ResultCollector<?, ?> rc = execution.execute(CustomerOrderListFunction.class.getSimpleName());
+		List<CustomerOrderIO> result = (List<CustomerOrderIO>) rc.getResult();
+		Assert.assertEquals(2, result.size());
+		Assert.assertNotNull(result.get(1));
+		Assert.assertEquals(customerKey.getId(), result.get(1).getCustomer().getId());
 
 		customerKey = new CustomerKey("customer2");
 		filter = new HashSet<CustomerKey>();
 		filter.add(customerKey);
 
 		execution = FunctionService.onRegion(customerOrderRegion).withFilter(filter);
-		rc = execution.execute(CustomerOrderPriceFunction.class.getSimpleName());
-		result = (List<BigDecimal>) rc.getResult();
+		rc = execution.execute(CustomerOrderListFunction.class.getSimpleName());
+		result = (List<CustomerOrderIO>) rc.getResult();
 		Assert.assertEquals(1, result.size());
-		totalPrice = result.get(0);
-		// 2.48
-		Assert.assertEquals(new BigDecimal("2.48"), totalPrice);
+		Assert.assertNotNull(result.get(0));
+		Assert.assertEquals(customerKey.getId(), result.get(0).getCustomer().getId());
 
-		// No such customer
 		customerKey = new CustomerKey("customer3");
 		filter = new HashSet<CustomerKey>();
 		filter.add(customerKey);
 
 		execution = FunctionService.onRegion(customerOrderRegion).withFilter(filter);
-		rc = execution.execute(CustomerOrderPriceFunction.class.getSimpleName());
-		result = (List<BigDecimal>) rc.getResult();
+		rc = execution.execute(CustomerOrderListFunction.class.getSimpleName());
+		result = (List<CustomerOrderIO>) rc.getResult();
 		Assert.assertEquals(1, result.size());
-		totalPrice = result.get(0);
-		Assert.assertEquals(null, totalPrice);
+		Assert.assertNull(result.get(0));
 	}
 
 }

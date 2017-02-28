@@ -81,7 +81,6 @@ public class CustomerOrderListFunctionTest {
 
 	@Before
 	public void setUp() throws Exception {
-		// when(cache.getQueryService()).thenReturn(queryService);
 		given(cache.getQueryService()).willReturn(queryService);
 		given(queryService.newQuery(anyString())).willReturn(query);
 		given(query.execute(regionFunctionContext)).willReturn(results);
@@ -236,7 +235,7 @@ public class CustomerOrderListFunctionTest {
 		given(results.asList()).willReturn(getCustomer2OrderEntryList());
 		customerOrderListFunction.process(regionFunctionContext);
 		
-		//customer 1 should have 1 order
+		//customer 2 should have 1 order
 		Mockito.verify(resultSender, times(0)).sendResult(any(CustomerOrderIO.class));
 		Mockito.verify(resultSender, times(1)).lastResult(any(CustomerOrderIO.class));
 	}

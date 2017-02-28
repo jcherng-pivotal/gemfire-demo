@@ -2,7 +2,9 @@ package io.pivotal.gemfire.demo.server.customerorder;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -134,13 +136,14 @@ public class TestUtil {
 		paper.setPrice("0.10");
 		itemRegion.put(paperKey, paper);
 
+		Map<CustomerOrderKey, CustomerOrder> dataMap = new HashMap<>();
 		Set<String> itemSet = new HashSet<String>();
 		itemSet.add(penKey.getId());
 		itemSet.add(paperKey.getId());
 		// 1.49 + 0.10 = 1.59
 		CustomerOrderKey customerOrderKey = new CustomerOrderKey("order1", customerKey1);
 		CustomerOrder customerOrder = new CustomerOrder("address1", (new Date()).getTime(), itemSet);
-		customerOrderRegion.put(customerOrderKey, customerOrder);
+		dataMap.put(customerOrderKey, customerOrder);
 
 		itemSet = new HashSet<String>();
 		itemSet.add(pencilKey.getId());
@@ -149,7 +152,7 @@ public class TestUtil {
 		// 1.59 + 0.99 = 2.58
 		customerOrderKey = new CustomerOrderKey("order2", customerKey1);
 		customerOrder = new CustomerOrder("address1", (new Date()).getTime(), itemSet);
-		customerOrderRegion.put(customerOrderKey, customerOrder);
+		dataMap.put(customerOrderKey, customerOrder);
 
 		itemSet = new HashSet<String>();
 		itemSet.add(pencilKey.getId());
@@ -157,7 +160,9 @@ public class TestUtil {
 		// 0.99 + 1.49 = 2.48
 		customerOrderKey = new CustomerOrderKey("order3", customerKey2);
 		customerOrder = new CustomerOrder("address2", (new Date()).getTime(), itemSet);
-		customerOrderRegion.put(customerOrderKey, customerOrder);
+		dataMap.put(customerOrderKey, customerOrder);
+
+		customerOrderRegion.putAll(dataMap);
 	}
 
 }

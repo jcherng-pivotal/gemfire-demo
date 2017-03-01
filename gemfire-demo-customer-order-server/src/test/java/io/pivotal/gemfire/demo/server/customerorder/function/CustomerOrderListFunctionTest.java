@@ -7,6 +7,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,8 +28,8 @@ import org.apache.geode.cache.query.SelectResults;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -72,9 +73,6 @@ public class CustomerOrderListFunctionTest {
 
 	@Mock
 	private SelectResults<Entry<CustomerOrderKey, CustomerOrder>> results;
-
-	@Mock
-	private List<Entry<CustomerOrderKey, CustomerOrder>> entryList;
 
 	@Mock
 	private RegionFunctionContext regionFunctionContext;
@@ -218,10 +216,20 @@ public class CustomerOrderListFunctionTest {
 
 		given(results.asList()).willReturn(getCustomer1OrderEntryList());
 		customerOrderListFunction.process(regionFunctionContext);
+
+		// customer 1 should have 2 order
+		ArgumentCaptor<CustomerOrderIO> captor = ArgumentCaptor.forClass(CustomerOrderIO.class);
+		verify(resultSender, times(1)).sendResult(captor.capture());
+		CustomerOrderIO customerOrderIO = captor.getValue();
+		assertThat(customerOrderIO.getId(), is("order1"));
+		assertThat(customerOrderIO.getCustomer().getId(), is("customer1"));
+		assertThat(customerOrderIO.getItems().size(), is(2));
 		
-		//customer 1 should have 2 order
-		Mockito.verify(resultSender, times(1)).sendResult(any(CustomerOrderIO.class));
-		Mockito.verify(resultSender, times(1)).lastResult(any(CustomerOrderIO.class));
+		verify(resultSender, times(1)).lastResult(captor.capture());
+		customerOrderIO = captor.getValue();
+		assertThat(customerOrderIO.getId(), is("order2"));
+		assertThat(customerOrderIO.getCustomer().getId(), is("customer1"));
+		assertThat(customerOrderIO.getItems().size(), is(3));
 	}
 
 	@Test
@@ -234,12 +242,18 @@ public class CustomerOrderListFunctionTest {
 
 		given(results.asList()).willReturn(getCustomer2OrderEntryList());
 		customerOrderListFunction.process(regionFunctionContext);
-		
-		//customer 2 should have 1 order
-		Mockito.verify(resultSender, times(0)).sendResult(any(CustomerOrderIO.class));
-		Mockito.verify(resultSender, times(1)).lastResult(any(CustomerOrderIO.class));
+
+		// customer 2 should have 1 order
+		ArgumentCaptor<CustomerOrderIO> captor = ArgumentCaptor.forClass(CustomerOrderIO.class);
+		verify(resultSender, times(0)).sendResult(captor.capture());
+
+		verify(resultSender, times(1)).lastResult(captor.capture());
+		CustomerOrderIO customerOrderIO = captor.getValue();
+		assertThat(customerOrderIO.getId(), is("order3"));
+		assertThat(customerOrderIO.getCustomer().getId(), is("customer2"));
+		assertThat(customerOrderIO.getItems().size(), is(2));
 	}
-	
+
 	@Test
 	public void testProcessCustomer3() {
 		Set filters = new HashSet<>();
@@ -250,10 +264,10 @@ public class CustomerOrderListFunctionTest {
 
 		given(results.asList()).willReturn(new ArrayList());
 		customerOrderListFunction.process(regionFunctionContext);
-		
-		//customer 3 should have 0 order
-		Mockito.verify(resultSender, times(0)).sendResult(any(CustomerOrderIO.class));
-		Mockito.verify(resultSender, times(1)).lastResult(null);
+
+		// customer 3 should have 0 order
+		verify(resultSender, times(0)).sendResult(any(CustomerOrderIO.class));
+		verify(resultSender, times(1)).lastResult(null);
 	}
 
 	@Configuration

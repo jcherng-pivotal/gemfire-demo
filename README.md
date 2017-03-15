@@ -1,4 +1,4 @@
-# gemfire-demo
+# Gemfire Demo
 
 ## Included Modules
    * **GemFire** - A set of gemfire related modules and scripts. This is to be used to start a local instance of gemfire. Jar files are stored in cluster and gemfire.properties/server-cache.xml is in conf. 

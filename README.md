@@ -1,6 +1,6 @@
 # gemfire-demo
 
-##Included Modules
+## Included Modules
    * **GemFire** - A set of gemfire related modules and scripts. This is to be used to start a local instance of gemfire. Jar files are stored in cluster and gemfire.properties/server-cache.xml is in conf. 
 
    * **Gemfire-demo-customer-order-client** - A simple GemFire client that has rest endpoints to execute functions. Used to load/ list data in regions. 
@@ -17,7 +17,7 @@
 
    * **Spring-cloud-gemfire-support** - A support module to allow for spring boot to run on GemFire server. This allows for the use of @ spring annotations when using server side java api.  Gemfire-demo-customer-order-server uses this when creating regions. 
    
-##GemFire Local with Cache.xml
+## GemFire Local with Cache.xml
    In a local development environment, a developer can start a GemFire instance same as one would in other environments. This includes gfsh commands as well as cache.xml. In the GemFire directory of the demo project, these scripts as well as the jar files are included to make starting GemFire easy. For this example, we still create regions using the Java api and Spring and deploy this to the server in our script. 
    
    * To begin, download the gemfire-demo project and run 

@@ -42,7 +42,7 @@
    * In the scripts directory there are start scripts for gemfire. To start the cluster for the demo, we need to execute the script start_cluster_config_gemfire.sh.
    Once this scripts is executed, you should see a list members and list regions appear as output to the script. 
    
-   ![Alt text](screen_shots/Screen Shot 2017-03-15 at 11.52.15 AM.png?raw=true)
+![Alt text](screen_shots/Screen Shot 2017-03-15 at 11.52.15 AM.png?raw=true)
    
    * This is now available for clients, gfsh, and monitoring tools to connect to. 
    A question around this is what created the regions, as we did not have any region config in the cache.xml or start script for gfsh. 
@@ -63,7 +63,7 @@
    
    * We can also verify that these were deployed via gfsh. To check connect to the locally running GemFire cluster and execute list deployed. 
    
-   ![Alt text](screen_shots/Screen Shot 2017-03-15 at 11.58.29 AM.png?raw=true)
+![Alt text](screen_shots/Screen Shot 2017-03-15 at 11.58.29 AM.png?raw=true)
    
    
    * We could have just as easily created these regions and functions using cache.xml, but now instead of having to stop and start the server for changes to server side code and regions, all we have to do is undeploy and redeploy the jar. 
@@ -83,24 +83,24 @@ GemFire allows for the opportunity to launch both locators and servers from the 
      * In this project you should find two .launch files. 
 
 
-  ![Alt text](screen_shots/Screen Shot 2017-03-15 at 11.11.13 AM.png?raw=true)
+![Alt text](screen_shots/Screen Shot 2017-03-15 at 11.11.13 AM.png?raw=true)
    
 
    * The example above shows an inteliJ configuration. To run these files all we need to do is execute the .launch files. In order to do so, we must convert using eclipser plugin:
    
-   ![Alt text](screen_shots/Screen Shot 2017-03-15 at 11.13.39 AM.png?raw=true)
+![Alt text](screen_shots/Screen Shot 2017-03-15 at 11.13.39 AM.png?raw=true)
    
 
 
 * We can now launch. To do so, click run configurations. The only change is to select your working directory which is where the GemFire locator and server files will be hosted. 
 
-  ![Alt text](screen_shots/Screen Shot 2017-03-15 at 11.16.22 AM.png?raw=true)
+![Alt text](screen_shots/Screen Shot 2017-03-15 at 11.16.22 AM.png?raw=true)
   
    * Now launch the locator file first followed by the server file. 
 
-  ![Alt text](screen_shots/Screen Shot 2017-03-15 at 11.19.06 AM.png?raw=true)
+![Alt text](screen_shots/Screen Shot 2017-03-15 at 11.19.06 AM.png?raw=true)
   
-  ![Alt text](screen_shots/Screen Shot 2017-03-15 at 11.19.34 AM.png?raw=true)
+![Alt text](screen_shots/Screen Shot 2017-03-15 at 11.19.34 AM.png?raw=true)
 
 
 
@@ -112,7 +112,7 @@ GemFire allows for the opportunity to launch both locators and servers from the 
 * We have showcased how to start GemFire via an IDE. To debug gemfire code such as functions all we need to do is set a breakpoint in one of the server side code classes. For example we can set one in the cache loader CustomerCacheLoader.java. 
 Now to test all we need to do is hit the endpoint on the client that executes this function. In the IDE where Gemfire is running, you should see the breakpoint hit as in any standard java debugger.
 
- ![Alt text](screen_shots/Screen Shot 2017-03-15 at 11.27.51 AM.png?raw=true)
+![Alt text](screen_shots/Screen Shot 2017-03-15 at 11.27.51 AM.png?raw=true)
 
 ## Running the demo 
 

@@ -2,6 +2,8 @@ package io.pivotal.gemfire.demo.server.config;
 
 import java.util.Arrays;
 
+import io.pivotal.gemfire.demo.model.gf.key.PersonKey;
+import io.pivotal.gemfire.demo.model.gf.pdx.Person;
 import org.apache.geode.cache.CacheLoader;
 import org.apache.geode.cache.GemFireCache;
 import org.apache.geode.cache.execute.Function;
@@ -62,13 +64,13 @@ public class GemFireCustomerOrderServerConfig {
     }
 
     //We can programatically add regions to any base server by deploying jar. For example if I wanted to create a test region
-    @Bean("sizer")
-    PartitionedRegionFactoryBean<String, String> sizerRegion(final GemFireCache cache) {
-        PartitionedRegionFactoryBean<String, String> sizerRegion = new PartitionedRegionFactoryBean<>();
-        sizerRegion.setCache(cache);
-        sizerRegion.setClose(false);
-        sizerRegion.setName("sizer");
-        return sizerRegion;
+    @Bean("person")
+    PartitionedRegionFactoryBean<PersonKey, Person> personRegion(final GemFireCache cache) {
+        PartitionedRegionFactoryBean<PersonKey, Person> personRegion = new PartitionedRegionFactoryBean<>();
+        personRegion.setCache(cache);
+        personRegion.setClose(false);
+        personRegion.setName("person");
+        return personRegion;
     }
 
 

@@ -2,6 +2,8 @@ package io.pivotal.gemfire.demo.server.config;
 
 import java.util.Arrays;
 
+import io.pivotal.gemfire.demo.model.gf.key.PersonKey;
+import io.pivotal.gemfire.demo.model.gf.pdx.Person;
 import org.apache.geode.cache.CacheLoader;
 import org.apache.geode.cache.GemFireCache;
 import org.apache.geode.cache.execute.Function;
@@ -27,64 +29,75 @@ import io.pivotal.gemfire.demo.server.customerorder.function.CustomerOrderPriceF
 
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan(basePackages = { "io.pivotal.gemfire.demo.server" })
-@Import({ CustomerOrderDBApplication.class })
+@ComponentScan(basePackages = {"io.pivotal.gemfire.demo.server"})
+@Import({CustomerOrderDBApplication.class})
 @EnableTransactionManagement
 public class GemFireCustomerOrderServerConfig {
 
-	@Bean("customer")
-	PartitionedRegionFactoryBean<CustomerKey, Customer> customerRegion(final GemFireCache cache,
-			final CacheLoader<CustomerKey, Customer> customerCacheLoader) {
-		PartitionedRegionFactoryBean<CustomerKey, Customer> customerRegion = new PartitionedRegionFactoryBean<>();
-		customerRegion.setCache(cache);
-		customerRegion.setClose(false);
-		customerRegion.setName("customer");
-		customerRegion.setCacheLoader(customerCacheLoader);
-		return customerRegion;
-	}
+    @Bean("customer")
+    PartitionedRegionFactoryBean<CustomerKey, Customer> customerRegion(final GemFireCache cache,
+                                                                       final CacheLoader<CustomerKey, Customer> customerCacheLoader) {
+        PartitionedRegionFactoryBean<CustomerKey, Customer> customerRegion = new PartitionedRegionFactoryBean<>();
+        customerRegion.setCache(cache);
+        customerRegion.setClose(false);
+        customerRegion.setName("customer");
+        customerRegion.setCacheLoader(customerCacheLoader);
+        return customerRegion;
+    }
 
-	@Bean("customer-order")
-	PartitionedRegionFactoryBean<CustomerOrderKey, CustomerOrder> customerOrderRegion(final GemFireCache cache) {
-		PartitionedRegionFactoryBean<CustomerOrderKey, CustomerOrder> customerOrderRegion = new PartitionedRegionFactoryBean<>();
-		customerOrderRegion.setCache(cache);
-		customerOrderRegion.setClose(false);
-		customerOrderRegion.setName("customer-order");
-		return customerOrderRegion;
-	}
+    @Bean("customer-order")
+    PartitionedRegionFactoryBean<CustomerOrderKey, CustomerOrder> customerOrderRegion(final GemFireCache cache) {
+        PartitionedRegionFactoryBean<CustomerOrderKey, CustomerOrder> customerOrderRegion = new PartitionedRegionFactoryBean<>();
+        customerOrderRegion.setCache(cache);
+        customerOrderRegion.setClose(false);
+        customerOrderRegion.setName("customer-order");
+        return customerOrderRegion;
+    }
 
-	@Bean("item")
-	PartitionedRegionFactoryBean<ItemKey, Item> itemRegion(final GemFireCache cache) {
-		PartitionedRegionFactoryBean<ItemKey, Item> itemRegion = new PartitionedRegionFactoryBean<>();
-		itemRegion.setCache(cache);
-		itemRegion.setClose(false);
-		itemRegion.setName("item");
-		return itemRegion;
-	}
+    @Bean("item")
+    PartitionedRegionFactoryBean<ItemKey, Item> itemRegion(final GemFireCache cache) {
+        PartitionedRegionFactoryBean<ItemKey, Item> itemRegion = new PartitionedRegionFactoryBean<>();
+        itemRegion.setCache(cache);
+        itemRegion.setClose(false);
+        itemRegion.setName("item");
+        return itemRegion;
+    }
 
-	@Bean
-	CacheLoader<CustomerKey, Customer> customerCacheLoader() {
-		return new CustomerCacheLoader();
-	}
+    //We can programatically add regions to any base server by deploying jar. For example if I wanted to create a test region
+    @Bean("person")
+    PartitionedRegionFactoryBean<PersonKey, Person> personRegion(final GemFireCache cache) {
+        PartitionedRegionFactoryBean<PersonKey, Person> personRegion = new PartitionedRegionFactoryBean<>();
+        personRegion.setCache(cache);
+        personRegion.setClose(false);
+        personRegion.setName("person");
+        return personRegion;
+    }
 
-	@Bean
-	FunctionServiceFactoryBean functionService(final Function customerOrderPriceFunction,
-			final Function customerOrderListFunction) {
-		FunctionServiceFactoryBean functionService = new FunctionServiceFactoryBean();
-		functionService
-				.setFunctions(Arrays.asList(new Function[] { customerOrderPriceFunction, customerOrderListFunction }));
-		return functionService;
-	}
 
-	@Bean
-	Function customerOrderPriceFunction() {
-		CustomerOrderPriceFunction customerOrderPriceFunction = new CustomerOrderPriceFunction();
-		return customerOrderPriceFunction;
-	}
+    @Bean
+    CacheLoader<CustomerKey, Customer> customerCacheLoader() {
+        return new CustomerCacheLoader();
+    }
 
-	@Bean
-	Function customerOrderListFunction() {
-		CustomerOrderListFunction customerOrderListFunction = new CustomerOrderListFunction();
-		return customerOrderListFunction;
-	}
+    @Bean
+    FunctionServiceFactoryBean functionService(final Function customerOrderPriceFunction,
+                                               final Function customerOrderListFunction) {
+        FunctionServiceFactoryBean functionService = new FunctionServiceFactoryBean();
+        functionService
+                .setFunctions(Arrays.asList(new Function[]{customerOrderPriceFunction, customerOrderListFunction}));
+        return functionService;
+    }
+
+    @Bean
+    Function customerOrderPriceFunction() {
+        CustomerOrderPriceFunction customerOrderPriceFunction = new CustomerOrderPriceFunction();
+        return customerOrderPriceFunction;
+    }
+
+    @Bean
+    Function customerOrderListFunction() {
+        CustomerOrderListFunction customerOrderListFunction = new CustomerOrderListFunction();
+        return customerOrderListFunction;
+    }
 
 }

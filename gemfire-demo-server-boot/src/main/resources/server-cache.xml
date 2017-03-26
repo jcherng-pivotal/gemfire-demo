@@ -20,12 +20,6 @@
 		</pdx-serializer>
 	</pdx>
 
-	<!-- initializer>
-		<class-name>org.springframework.data.gemfire.support.SpringContextBootstrappingInitializer</class-name>
-		<parameter name="basePackages">
-			<string>io.pivotal.gemfire.demo.server</string>
-		</parameter>
-	</initializer -->
 
 	<initializer>
 		<class-name>io.pivotal.gemfire.demo.server.initializer.GemFireInitializer</class-name>

@@ -26,7 +26,6 @@ import io.pivotal.gemfire.demo.model.gf.pdx.Customer;
 import io.pivotal.gemfire.demo.model.gf.pdx.CustomerOrder;
 import io.pivotal.gemfire.demo.model.gf.pdx.Item;
 import io.pivotal.gemfire.demo.model.io.CustomerOrderIO;
-import io.pivotal.gemfire.demo.server.customerorder.function.CustomerOrderListFunction;
 
 @RestController
 public class CustomerOrderController {
@@ -137,14 +136,16 @@ public class CustomerOrderController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/getCustomerOrderList", method = RequestMethod.GET)
 	public List<CustomerOrderIO> getCustomerOrderList(@RequestParam(value = "customerId") String customerId) {
-		CustomerKey customerKey = new CustomerKey(customerId);
-		Set<CustomerKey> filter = new HashSet<CustomerKey>();
-		filter.add(customerKey);
+//		CustomerKey customerKey = new CustomerKey(customerId);
+//		Set<CustomerKey> filter = new HashSet<CustomerKey>();
+//		filter.add(customerKey);
+//
+//		Execution execution = FunctionService.onRegion(customerOrderRegion).withFilter(filter);
+//		ResultCollector<?, ?> rc = execution.execute(CustomerOrderListFunction.class.getSimpleName());
+//		List<CustomerOrderIO> result = (List<CustomerOrderIO>) rc.getResult();
+//		return result;
 
-		Execution execution = FunctionService.onRegion(customerOrderRegion).withFilter(filter);
-		ResultCollector<?, ?> rc = execution.execute(CustomerOrderListFunction.class.getSimpleName());
-		List<CustomerOrderIO> result = (List<CustomerOrderIO>) rc.getResult();
-		return result;
+		return null;
 	}
 
 }
